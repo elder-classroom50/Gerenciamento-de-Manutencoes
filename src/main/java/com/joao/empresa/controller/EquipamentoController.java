@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/equipamentos")
@@ -41,4 +42,17 @@ public class EquipamentoController {
                 .created(location)
                 .body(EquipamentoResponse.from(equipamento));
     }
+
+    @GetMapping
+    public ResponseEntity<List<EquipamentoResponse>> listar() {
+
+        List<EquipamentoResponse> equipamentos =
+                equipamentoService.listar()
+                        .stream()
+                        .map(EquipamentoResponse::from)
+                        .toList();
+
+        return ResponseEntity.ok(equipamentos);
+    }
+
 }
