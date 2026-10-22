@@ -55,4 +55,15 @@ public class EquipamentoController {
         return ResponseEntity.ok(equipamentos);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipamentoResponse> buscarPorId(@PathVariable Integer id) {
+
+        Equipamento equipamento =
+                equipamentoService.buscarPorId(id);
+
+        return ResponseEntity.ok(
+                EquipamentoResponse.from(equipamento)
+        );
+    }
+
 }
